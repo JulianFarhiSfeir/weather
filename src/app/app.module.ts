@@ -23,7 +23,7 @@ import { FormErrorsMessagePipe } from './shared/pipes/form-errors-message.pipe';
 		HttpClientModule,
 		RouterModule,
 		routing,
-		ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
+		ServiceWorkerModule.register('/weather/ngsw-worker.js', {enabled: environment.production}),
 		NgOptimizedImage,
 		TabPanelComponent
 	],

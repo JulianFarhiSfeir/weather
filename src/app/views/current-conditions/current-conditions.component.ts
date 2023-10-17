@@ -45,6 +45,9 @@ export class CurrentConditionsComponent {
 			icon: this.weatherManager.getWeatherIcon(currentCondition.data.weather[0].id)
 		}));
 	})
+	public trackConditions(index: number, condition: Condition) {
+		return condition.zipCode;
+	}
 
 	public addLocation(zipCode: string): void {
 		this.weatherManager

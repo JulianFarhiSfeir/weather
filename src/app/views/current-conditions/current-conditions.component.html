@@ -9,7 +9,7 @@
 	<ng-container *ngIf="currentConditionsByZip() as conditions">
 		<app-tabs *ngIf="conditions?.length else noData"
 				  (close)="removeLocation($event)">
-			<app-tab-panel *ngFor="let condition of conditions; let i = index"
+			<app-tab-panel *ngFor="let condition of conditions; let i = index; trackBy: trackConditions"
 						   [header]="condition | conditionTabLabel">
 				<app-condition-card [condition]="condition"></app-condition-card>
 			</app-tab-panel>

@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1697555125142,
+  "timestamp": 1697555981858,
   "index": "/weather/index.html",
   "assetGroups": [
     {
@@ -11,14 +11,14 @@
         "ignoreVary": true
       },
       "urls": [
-        "/weather/404.91d5b9dda126e2d9.js",
+        "/weather/404.83edfef8f62063a3.js",
         "/weather/818.e1f66fcedb73e601.js",
         "/weather/993.e162328729c3aa96.js",
         "/weather/favicon.ico",
         "/weather/index.html",
-        "/weather/main.f875c48f9332c819.js",
+        "/weather/main.f25fd4b83a9551e1.js",
         "/weather/polyfills.1aa18cd3903be6e2.js",
-        "/weather/runtime.92430172d0bede7e.js",
+        "/weather/runtime.3c56136bd97bedff.js",
         "/weather/styles.5a844b9747babb89.css"
       ],
       "patterns": []
@@ -48,7 +48,7 @@
     {
       "name": "WeatherAPI",
       "patterns": [
-        "http:\\/\\/api\\.openweathermap\\.org\\/data\\/.*"
+        "https:\\/\\/api\\.openweathermap\\.org\\/data\\/.*"
       ],
       "strategy": "performance",
       "maxSize": 20,
@@ -61,7 +61,7 @@
     }
   ],
   "hashTable": {
-    "/weather/404.91d5b9dda126e2d9.js": "dabe49f51cd3951c3ed87c2ab791e476dd99decd",
+    "/weather/404.83edfef8f62063a3.js": "9f645b70039fab4eb14b06622f234fb726e2db4a",
     "/weather/818.e1f66fcedb73e601.js": "0cde1218cc807f7465ae798944eab13318d39068",
     "/weather/993.e162328729c3aa96.js": "7f9bb0e2b3f084193f1c66541858228f3179643c",
     "/weather/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
@@ -74,10 +74,10 @@
     "/weather/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/weather/assets/weather.json": "5ce53747ac7b830cab8740514bba77459926438a",
     "/weather/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/weather/index.html": "aec7a2841ab8fdec0f521c9bd693d3eb29478050",
-    "/weather/main.f875c48f9332c819.js": "d14bcf89a0929f0a68c6da74381057f8494464dc",
+    "/weather/index.html": "4e0a5ed76e6e1a4bfe17883ec485488f573bc6f3",
+    "/weather/main.f25fd4b83a9551e1.js": "b95095277d9a45928f1046cda0c28cc89dee93ac",
     "/weather/polyfills.1aa18cd3903be6e2.js": "3f1f560223639acff1549d399e1c3f07373da5ba",
-    "/weather/runtime.92430172d0bede7e.js": "710d9f02a96ea2952563ae93af8a2f9f1e1a9a7c",
+    "/weather/runtime.3c56136bd97bedff.js": "e157846c80b077b3296687d2579dbbd6fcfc673f",
     "/weather/styles.5a844b9747babb89.css": "a4c4de54f0bacd4e7ff58c0837d3dd06ba3322b8"
   },
   "navigationUrls": [

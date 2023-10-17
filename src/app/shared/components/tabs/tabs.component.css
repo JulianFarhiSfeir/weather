@@ -1,0 +1,13 @@
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    padding-right: 23px;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 6px;
+}

@@ -1,0 +1,19 @@
+<ul class="nav nav-tabs">
+	<ng-container *ngFor="let tab of tabs; let i = index">
+		<li class="nav-item"
+			*ngIf="!tab.closed"
+			[hidden]="tab.closed"
+			[ngClass]="{'active': tab.selected}">
+			<a class="nav-link"
+			   href="#"
+			   (click)="showTabPanel($event, tab)">
+				<span>{{ tab.header }}</span>
+			</a>
+			<span class="close"
+				  (click)="closeTab(i, tab)">&times;</span>
+		</li>
+	</ng-container>
+
+</ul>
+
+<ng-content></ng-content>

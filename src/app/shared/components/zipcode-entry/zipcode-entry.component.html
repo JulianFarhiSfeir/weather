@@ -1,0 +1,24 @@
+<div class="well">
+	<form [formGroup]="form"
+		  novalidate
+		  (ngSubmit)="submit()" [ngClass]="{'has-error': form.invalid && form.dirty, 'has-success': form.valid && form.dirty}">
+		<h2>Enter a zipcode</h2>
+		<label for="zipcode"></label>
+		<input type="text"
+			   id="zipcode"
+			   formControlName="zipCode"
+			   placeholder="Zipcode"
+			   class="form-control">
+		<p class="message invalid-feedback">
+			<ng-container *ngIf="form.controls.zipCode.errors as errors">
+				{{ errors | formErrorsMessage}}
+			</ng-container>
+		</p>
+		<br>
+		<button type="submit"
+				[disabled]="form.disabled || form.invalid"
+				class="btn btn-primary">
+			Add location
+		</button>
+	</form>
+</div>

@@ -1,0 +1,22 @@
+<div class="well flex">
+	<div>
+		<h3>{{condition.name}} ({{condition.zipCode}})</h3>
+		<h4>Current conditions: {{condition.main}}</h4>
+		<h4>Temperatures today:</h4>
+		<p>
+			Current {{condition.temp.current | number:'.0-0'}}
+			- Max {{condition.temp.max | number:'.0-0'}}
+			- Min {{condition.temp.min | number:'.0-0'}}
+		</p>
+		<p>
+			<a [routerLink]="['/forecast', condition.zipCode]">Show 5-day forecast
+				for {{condition.name}}</a>
+		</p>
+	</div>
+	<div>
+		<img alt="Condition icon : {{condition.main | titlecase}}"
+			 width="200"
+			 height="200"
+			 [ngSrc]="condition.icon">
+	</div>
+</div>

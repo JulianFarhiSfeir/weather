@@ -1,0 +1,26 @@
+<div class="container-fluid">
+	<div *ngIf="message()"
+		 class="alert alert-danger message">
+		{{message()}}
+	</div>
+
+	<app-zipcode-entry (addLocation)="addLocation($event)"></app-zipcode-entry>
+
+	<ng-container *ngIf="currentConditionsByZip() as conditions">
+		<app-tabs *ngIf="conditions?.length else noData"
+				  (close)="removeLocation($event)">
+			<app-tab-panel *ngFor="let condition of conditions; let i = index"
+						   [header]="condition | conditionTabLabel">
+				<app-condition-card [condition]="condition"></app-condition-card>
+			</app-tab-panel>
+		</app-tabs>
+	</ng-container>
+
+	<ng-template #noData>
+		<div class="alert alert-info">
+			No conditions loaded, please enter an US zip code
+		</div>
+	</ng-template>
+</div>
+
+

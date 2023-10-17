@@ -1,0 +1,11 @@
+.no-data {
+    display: flex;
+    font-size: 20px;
+}
+
+.message {
+    position: absolute;
+    top: 20px;
+    width: 250px;
+    left: calc(50% - 125px)
+}

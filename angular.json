@@ -109,12 +109,25 @@
     }
   },
   "schematics": {
+
     "@schematics/angular:component": {
       "prefix": "app",
-      "style": "css"
+      "style": "css",
+      "project": "ng-weather",
+      "standalone": true
     },
     "@schematics/angular:directive": {
-      "prefix": "app"
+      "prefix": "app",
+      "project": "ng-weather"
+    },
+    "@schematics/angular:resolver": {
+      "project": "ng-weather"
+    },
+    "@schematics/angular:pipe": {
+      "project": "ng-weather"
+    },
+    "@schematics/angular:interceptor": {
+      "project": "ng-weather"
     }
   }
 }

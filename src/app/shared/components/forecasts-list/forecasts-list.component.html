@@ -1,0 +1,15 @@
+<ul class="list-group">
+	<li *ngFor="let forecast of forecasts"
+		class="list-group-item">
+		{{ (forecast.date) | date:'EEEE, MMM d'}}:
+		{{forecast.main}}
+		- Min: {{forecast.temp.min | number:'.0-0'}}
+		- Max: {{forecast.temp.max | number:'.0-0'}}
+
+		<img [ngSrc]="forecast.icon"
+			 alt=""
+			 width="50"
+			 height="50"
+			 class="icon">
+	</li>
+</ul>

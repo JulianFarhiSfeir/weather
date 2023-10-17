@@ -27,8 +27,10 @@
         "http://api.openweathermap.org/data/**"
       ],
       "cacheConfig": {
-        "maxAge": "6h",
-        "strategy": "freshness"
+        "maxAge": "1h",
+        "strategy": "performance",
+        "maxSize": 20,
+        "timeout": "10s"
       }
     }]
 }

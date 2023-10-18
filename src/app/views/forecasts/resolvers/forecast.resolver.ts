@@ -1,19 +1,19 @@
 import {ResolveFn} from '@angular/router';
 import {inject} from "@angular/core";
-import {WeatherApiService} from "../../core/api/weather-api.service";
+import {WeatherApiService} from "../../../core/api/weather-api.service";
 import {map} from "rxjs/operators";
-import {WeatherManagerService} from "../../core/weather-manager.service";
-import {Forecast} from "../../shared/components/forecasts-list/forecast-list.typings";
-import {Forecasts} from "./forecasts.typings";
+import {WeatherManagerService} from "../../../core/weather-manager.service";
+import {Forecast} from "../../../shared/components/forecasts-list/forecast-list.typings";
+import {Forecasts} from "../forecasts.typings";
 
 export const forecastResolver: ResolveFn<Forecasts> = (route, state) => {
 	const weatherApiService = inject(WeatherApiService);
 	const weatherManagerService = inject(WeatherManagerService);
-	const zipCode = route.paramMap.get('zipcode');
-	if (!zipCode) {
+	const zipcode = route.paramMap.get('zipcode');
+	if (!zipcode) {
 		return undefined;
 	}
-	return weatherApiService.getForecast(zipCode)
+	return weatherApiService.getForecast(zipcode)
 		.pipe(
 			map((forecast) => {
 				const forecasts = forecast.list.map((condition) =>

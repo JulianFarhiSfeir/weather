@@ -1,5 +1,5 @@
 interface ConstructorParams {
-    zipCode: string;
+    zipcode: string;
     name: string;
     main: string;
     temp: { current: number; min: number; max: number };
@@ -7,7 +7,7 @@ interface ConstructorParams {
 }
 
 export class Condition {
-    zipCode: string;
+    zipcode: string;
     name: string;
     main: string;
     temp: {
@@ -17,8 +17,8 @@ export class Condition {
     };
     icon: string;
 
-    constructor({zipCode, name, main, temp, icon}: ConstructorParams) {
-        this.zipCode = zipCode;
+    constructor({zipcode, name, main, temp, icon}: ConstructorParams) {
+        this.zipcode = zipcode;
         this.name = name;
         this.main = main;
         this.temp = temp;

@@ -1,5 +1,4 @@
-import {Component, computed, signal, Signal} from '@angular/core';
-import {WeatherManagerService} from "../../core/weather-manager.service";
+import {Component, Signal} from '@angular/core';
 import {Condition} from "../../shared/components/condition-card/condition-card.component.typings";
 import {ZipcodeEntryComponent} from "../../shared/components/zipcode-entry/zipcode-entry.component";
 import {TabsComponent} from "../../shared/components/tabs/tabs.component";
@@ -7,14 +6,15 @@ import {ConditionCardComponent} from "../../shared/components/condition-card/con
 import {TabPanelComponent} from "../../shared/components/tabs/tab-panel/tab-panel.component";
 import {JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {ConditionTabLabelPipe} from "../../shared/pipes/condition-tab-label.pipe";
-import {catchError, delay, tap} from "rxjs/operators";
-import {of} from "rxjs";
+import {RouterLink} from "@angular/router";
+import {CurrentConditionsService} from "./current-conditions.service";
 
 @Component({
 	selector: 'app-current-conditions',
 	templateUrl: './current-conditions.component.html',
 	styleUrls: ['./current-conditions.component.css'],
 	standalone: true,
+	viewProviders: [CurrentConditionsService],
 	imports: [
 		ZipcodeEntryComponent,
 		TabsComponent,
@@ -23,53 +23,34 @@ import {of} from "rxjs";
 		NgForOf,
 		JsonPipe,
 		ConditionTabLabelPipe,
-		NgIf
+		NgIf,
+		RouterLink
 	]
 })
 export class CurrentConditionsComponent {
-	public message = signal('');
-	constructor(private weatherManager: WeatherManagerService) {
+	public message: Signal<string> = this.currentConditionsService.errorMessage;
+	public conditions: Signal<Condition[]> = this.currentConditionsService.conditions;
+
+	constructor(private currentConditionsService: CurrentConditionsService) {
 	}
 
-	public currentConditionsByZip: Signal<Condition[]> = computed(() => {
-		const currentConditions = this.weatherManager.getCurrentConditions()();
-		return currentConditions.map((currentCondition) => new Condition({
-			name: currentCondition.data.name,
-			main: currentCondition.data.weather[0].main,
-			zipCode: currentCondition.zipcode,
-			temp: {
-				current: currentCondition.data.main.temp,
-				min: currentCondition.data.main.temp_min,
-				max: currentCondition.data.main.temp_max
-			},
-			icon: this.weatherManager.getWeatherIcon(currentCondition.data.weather[0].id)
-		}));
-	})
-	public trackConditions(index: number, condition: Condition) {
-		return condition.zipCode;
+	public trackConditions(index: number, condition: Condition): string {
+		return condition.zipcode;
 	}
 
-	public addLocation(zipCode: string): void {
-		this.weatherManager
-			.addCurrentConditions(zipCode)
-			.pipe(
-				catchError((error) => {
-					return of(error)
-						.pipe(
-							tap(() => this.message.set(error.message)),
-							delay(3000),
-							tap(() => this.message.set(''))
-						)
-				})
-			)
-			.subscribe()
+	public addLocation(zipcode: string): void {
+		this.currentConditionsService.addLocation(zipcode)
 	}
 
-	public removeLocation(index: number) {
-		const condition = this.currentConditionsByZip().find((condition, i) => i === index);
-		if (!condition) {
+	public removeLocation(index: number): void {
+		this.currentConditionsService.removeLocation(index);
+	}
+
+	public navigate(event: MouseEvent, zipcode: string): void {
+		// Avoid double navigation when clicking on link
+		if (event.target instanceof HTMLAnchorElement) {
 			return;
 		}
-		this.weatherManager.removeCurrentConditions(condition.zipCode);
+		this.currentConditionsService.navigate(zipcode).subscribe();
 	}
 }

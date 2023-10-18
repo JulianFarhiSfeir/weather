@@ -4,14 +4,14 @@ import {LocationService} from "../../../core/location.service";
 
 @Injectable()
 export class ZipcodeEntryValidatorsService {
-	private locationService = inject(LocationService);
+	private locationService: LocationService = inject(LocationService);
 
 	public alreadyExist(): ValidatorFn {
 		return control => {
 			const hasZipcode = this.locationService.has(control.value);
 			if (hasZipcode) {
 				return {
-					alreadyExist: 'The zip code entry already exist',
+					alreadyExist: 'The zip code entry already exists',
 				}
 			}
 

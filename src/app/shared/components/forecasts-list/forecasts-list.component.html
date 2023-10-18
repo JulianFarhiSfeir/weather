@@ -7,7 +7,7 @@
 		- Max: {{forecast.temp.max | number:'.0-0'}}
 
 		<img [ngSrc]="forecast.icon"
-			 alt=""
+			 alt="Condition icon : {{forecast.main | titlecase}}"
 			 width="50"
 			 height="50"
 			 class="icon">

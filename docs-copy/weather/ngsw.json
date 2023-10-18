@@ -1,0 +1,102 @@
+{
+  "configVersion": 1,
+  "timestamp": 1697556381248,
+  "index": "/weather/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/weather/404.83edfef8f62063a3.js",
+        "/weather/818.e1f66fcedb73e601.js",
+        "/weather/993.e162328729c3aa96.js",
+        "/weather/favicon.ico",
+        "/weather/index.html",
+        "/weather/main.849d6e8007fbc62f.js",
+        "/weather/polyfills.1aa18cd3903be6e2.js",
+        "/weather/runtime.3c56136bd97bedff.js",
+        "/weather/styles.5a844b9747babb89.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/weather/assets/icons/icon-128x128.png",
+        "/weather/assets/icons/icon-144x144.png",
+        "/weather/assets/icons/icon-152x152.png",
+        "/weather/assets/icons/icon-192x192.png",
+        "/weather/assets/icons/icon-384x384.png",
+        "/weather/assets/icons/icon-512x512.png",
+        "/weather/assets/icons/icon-72x72.png",
+        "/weather/assets/icons/icon-96x96.png",
+        "/weather/assets/weather.json"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "WeatherAPI",
+      "patterns": [
+        "https:\\/\\/api\\.openweathermap\\.org\\/data\\/.*"
+      ],
+      "strategy": "performance",
+      "maxSize": 20,
+      "maxAge": 3600000,
+      "timeoutMs": 10000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    }
+  ],
+  "hashTable": {
+    "/weather/404.83edfef8f62063a3.js": "9f645b70039fab4eb14b06622f234fb726e2db4a",
+    "/weather/818.e1f66fcedb73e601.js": "0cde1218cc807f7465ae798944eab13318d39068",
+    "/weather/993.e162328729c3aa96.js": "7f9bb0e2b3f084193f1c66541858228f3179643c",
+    "/weather/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/weather/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/weather/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/weather/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/weather/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/weather/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/weather/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/weather/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/weather/assets/weather.json": "5ce53747ac7b830cab8740514bba77459926438a",
+    "/weather/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
+    "/weather/index.html": "2ed7e96d52d60aaef8fed7bb308747f9cd1becdb",
+    "/weather/main.849d6e8007fbc62f.js": "a197044d5ac6b9d2758d9dcde76c11c990c74cf5",
+    "/weather/polyfills.1aa18cd3903be6e2.js": "3f1f560223639acff1549d399e1c3f07373da5ba",
+    "/weather/runtime.3c56136bd97bedff.js": "e157846c80b077b3296687d2579dbbd6fcfc673f",
+    "/weather/styles.5a844b9747babb89.css": "a4c4de54f0bacd4e7ff58c0837d3dd06ba3322b8"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

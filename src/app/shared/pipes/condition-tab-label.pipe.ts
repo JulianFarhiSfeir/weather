@@ -8,7 +8,7 @@ import {Condition} from "../components/condition-card/condition-card.component.t
 export class ConditionTabLabelPipe implements PipeTransform {
 
   transform(condition: Condition): unknown {
-    return `${condition.name} (${condition.zipCode})`;
+    return `${condition.name} (${condition.zipcode})`;
   }
 
 }

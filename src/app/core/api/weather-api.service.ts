@@ -16,7 +16,6 @@ export class WeatherApiService {
 	}
 
 	public getConditionByZipCode(zipcode: string): Observable<ExternalCurrentCondition> {
-		// Here we make a request to get the current conditions data from the API. Note the use of backticks and an expression to insert the zipcode
 		const params = new HttpParams({
 			fromObject: {
 				zip: `${zipcode},us`,
@@ -34,7 +33,6 @@ export class WeatherApiService {
 				cnt: 5
 			}
 		})
-		// Here we make a request to get the forecast data from the API. Note the use of backticks and an expression to insert the zipcode
 		return this.http.get<ExternalForecast>(`${WeatherApiService.URL}/forecast/daily`, {params});
 	}
 }

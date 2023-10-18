@@ -3,20 +3,21 @@
 		  novalidate
 		  (ngSubmit)="submit()" [ngClass]="{'has-error': form.invalid && form.dirty, 'has-success': form.valid && form.dirty}">
 		<h2>Enter a zipcode</h2>
-		<label for="zipcode"></label>
-		<input type="text"
-			   id="zipcode"
-			   formControlName="zipCode"
-			   placeholder="Zipcode"
-			   class="form-control">
+		<div class="form-group">
+			<label for="zipcode">Zipcode</label>
+			<input type="text"
+				   id="zipcode"
+				   formControlName="zipcode"
+				   placeholder="Zipcode"
+				   class="form-control"></div>
 		<p class="message invalid-feedback">
-			<ng-container *ngIf="form.controls.zipCode.errors as errors">
+			<ng-container *ngIf="form.controls.zipcode.errors as errors">
 				{{ errors | formErrorsMessage}}
 			</ng-container>
 		</p>
 		<br>
 		<button type="submit"
-				[disabled]="form.disabled || form.invalid"
+				[disabled]="form.disabled || form.invalid || form.pristine"
 				class="btn btn-primary">
 			Add location
 		</button>

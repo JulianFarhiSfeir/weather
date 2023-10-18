@@ -16,14 +16,14 @@ import {FormErrorsMessagePipe} from "../../pipes/form-errors-message.pipe";
 		FormErrorsMessagePipe,
 		NgClass
 	],
-	providers: [ZipcodeEntryValidatorsService]
+	viewProviders: [ZipcodeEntryValidatorsService]
 })
 export class ZipcodeEntryComponent {
 	@Output()
 	public addLocation = new EventEmitter<string>();
 
 	public form = new FormGroup({
-		zipCode: new FormControl('', [
+		zipcode: new FormControl('', [
 			this.validators.alreadyExist(),
 			this.validators.length(5),
 			this.validators.required()
@@ -35,8 +35,8 @@ export class ZipcodeEntryComponent {
 
 
 	submit() {
-		const zipCode = this.form.value.zipCode;
-		this.addLocation.emit(zipCode);
+		const zipcode = this.form.value.zipcode;
+		this.addLocation.emit(zipcode);
 		this.form.reset();
 	}
 }

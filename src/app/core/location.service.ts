@@ -35,7 +35,7 @@ export class LocationService {
 		return Array.from(this.locations);
 	}
 
-	public has(zipCode: string): boolean {
-		return this.locations.has(zipCode);
+	public has(zipcode: string): boolean {
+		return this.locations.has(zipcode);
 	}
 }

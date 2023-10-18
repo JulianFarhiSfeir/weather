@@ -21,15 +21,15 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 	imports: [TabPanelComponent, NgForOf, NgClass, NgIf],
 })
 export class TabsComponent implements AfterContentInit {
-	private destroyRef = inject(DestroyRef);
+	private destroyRef: DestroyRef = inject(DestroyRef);
 	public tabs: TabPanelComponent[];
-	public currentTabIndex = 0;
+	public currentTabIndex: number = 0;
 
 	@ContentChildren(TabPanelComponent)
 	public tabPanels: QueryList<TabPanelComponent>;
 
 	@Output()
-	public close = new EventEmitter<number>();
+	public close: EventEmitter<number> = new EventEmitter<number>();
 
 	public closeTab(index: number, tab: TabPanelComponent): void {
 		this.close.emit(index);
@@ -56,6 +56,9 @@ export class TabsComponent implements AfterContentInit {
 		this.tabPanels.changes
 			.pipe(
 				startWith(''),
+				// Avoid error NG0100: Expression has changed after it was checked
+				// see https://angular.io/errors/NG0100
+				// https://blog.angular-university.io/angular-debugging/#analternativeusingrxjs
 				delay(0),
 				tap(() => this.updateTabs()),
 				takeUntilDestroyed(this.destroyRef)

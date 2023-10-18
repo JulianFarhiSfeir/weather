@@ -129,6 +129,9 @@
     },
     "@schematics/angular:interceptor": {
       "project": "ng-weather"
+    },
+    "@schematics/angular:service": {
+      "project": "ng-weather"
     }
   }
 }

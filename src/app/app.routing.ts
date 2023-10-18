@@ -1,6 +1,6 @@
 import {ModuleWithProviders} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {forecastResolver} from "./views/forecasts/forecast.resolver";
+import {forecastResolver} from "./views/forecasts/resolvers/forecast.resolver";
 
 const appRoutes: Routes = [
 	{

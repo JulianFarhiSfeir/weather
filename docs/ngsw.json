@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1697623883926,
+  "timestamp": 1697632683025,
   "index": "/weather/index.html",
   "assetGroups": [
     {
@@ -52,7 +52,7 @@
       ],
       "strategy": "performance",
       "maxSize": 50,
-      "maxAge": 5000,
+      "maxAge": 7200000,
       "timeoutMs": 10000,
       "cacheQueryOptions": {
         "ignoreVary": true

@@ -1,22 +1,23 @@
-import {ResolveFn} from '@angular/router';
+import {ActivatedRouteSnapshot, ResolveFn} from '@angular/router';
 import {inject} from "@angular/core";
 import {WeatherApiService} from "../../../core/api/weather-api.service";
 import {map} from "rxjs/operators";
 import {WeatherManagerService} from "../../../core/weather-manager.service";
 import {Forecast} from "../../../shared/components/forecasts-list/forecast-list.typings";
 import {Forecasts} from "../forecasts.typings";
+import {ExternalForecast} from "../../../core/api/weather-api.typings";
 
-export const forecastResolver: ResolveFn<Forecasts> = (route, state) => {
-	const weatherApiService = inject(WeatherApiService);
-	const weatherManagerService = inject(WeatherManagerService);
-	const zipcode = route.paramMap.get('zipcode');
+export const forecastResolver: ResolveFn<Forecasts> = (route: ActivatedRouteSnapshot) => {
+	const weatherApiService: WeatherApiService = inject(WeatherApiService);
+	const weatherManagerService: WeatherManagerService = inject(WeatherManagerService);
+	const zipcode: string = route.paramMap.get('zipcode');
 	if (!zipcode) {
 		return undefined;
 	}
 	return weatherApiService.getForecast(zipcode)
 		.pipe(
-			map((forecast) => {
-				const forecasts = forecast.list.map((condition) =>
+			map((forecast: ExternalForecast) => {
+				const forecasts: Forecast[] = forecast.list.map((condition) =>
 					new Forecast({
 						main: condition.weather[0].main,
 						temp: {
@@ -27,10 +28,10 @@ export const forecastResolver: ResolveFn<Forecasts> = (route, state) => {
 						icon: weatherManagerService.getWeatherIcon(condition.weather[0].id)
 					})
 				)
-				return {
+				return new Forecasts({
 					cityName: forecast.city.name,
 					forecasts,
-				}
+				})
 			})
 		)
 };

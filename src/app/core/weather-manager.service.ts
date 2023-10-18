@@ -1,24 +1,24 @@
-import {Injectable, Signal, signal} from '@angular/core';
-
+import {Injectable, Signal, signal, WritableSignal} from '@angular/core';
 import {WeatherApiService} from "./api/weather-api.service";
 import {catchError, tap} from "rxjs/operators";
 import {ConditionsAndZip} from "./weather-manager.typings";
 import {LocationService} from "./location.service";
 import {combineLatest, Observable, of, throwError} from "rxjs";
 import {environment} from "../../environments/environment";
+import {ExternalCurrentCondition} from "./api/weather-api.typings";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class WeatherManagerService {
-	private currentConditions = signal<Partial<ConditionsAndZip>[]>([]);
+	private currentConditions: WritableSignal<Partial<ConditionsAndZip>[]> = signal<Partial<ConditionsAndZip>[]>([]);
 	private ICON_URL: string = environment.weatherIconUrl;
 
 	constructor(
 		private weatherApiService: WeatherApiService,
 		private locationService: LocationService,
 	) {
-		this.conditionsInitialization().subscribe()
+		this.conditionsInitialization().subscribe();
 	}
 
 	private conditionsInitialization() {
@@ -31,12 +31,11 @@ export class WeatherManagerService {
 		return combineLatest(conditions$);
 	}
 
-
-	public addCurrentConditions(zipcode: string): Observable<any> {
+	public addCurrentConditions(zipcode: string): Observable<ExternalCurrentCondition> {
 		return this.weatherApiService.getConditionByZipCode(zipcode)
 			.pipe(
 				tap(() => this.locationService.addLocation(zipcode)),
-				tap(data => this.currentConditions.mutate(conditions => {
+				tap((data: ExternalCurrentCondition) => this.currentConditions.mutate(conditions => {
 					conditions.push({zipcode, data})
 				})),
 				catchError(() => {

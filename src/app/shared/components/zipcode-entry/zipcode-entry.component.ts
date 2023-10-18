@@ -3,6 +3,7 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular
 import {ZipcodeEntryValidatorsService} from "./zipcode-entry-validators.service";
 import {NgClass, NgIf} from "@angular/common";
 import {FormErrorsMessagePipe} from "../../pipes/form-errors-message.pipe";
+import {ZipcodeEntryForm} from "./zipcode-entry.typings";
 
 @Component({
 	selector: 'app-zipcode-entry',
@@ -20,21 +21,20 @@ import {FormErrorsMessagePipe} from "../../pipes/form-errors-message.pipe";
 })
 export class ZipcodeEntryComponent {
 	@Output()
-	public addLocation = new EventEmitter<string>();
+	public addLocation: EventEmitter<string> = new EventEmitter<string>();
 
-	public form = new FormGroup({
+	public form: FormGroup<ZipcodeEntryForm> = new FormGroup<ZipcodeEntryForm>({
 		zipcode: new FormControl('', [
 			this.validators.alreadyExist(),
 			this.validators.length(5),
 			this.validators.required()
 		])
-	})
+	});
 
 	constructor(private validators: ZipcodeEntryValidatorsService) {
 	}
 
-
-	submit() {
+	public submit(): void {
 		const zipcode = this.form.value.zipcode;
 		this.addLocation.emit(zipcode);
 		this.form.reset();

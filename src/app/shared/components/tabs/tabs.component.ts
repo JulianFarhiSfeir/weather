@@ -1,13 +1,4 @@
-import {
-	AfterContentInit,
-	Component,
-	ContentChildren,
-	DestroyRef,
-	EventEmitter,
-	inject,
-	Output,
-	QueryList
-} from '@angular/core';
+import {AfterContentInit, Component, ContentChildren, DestroyRef, EventEmitter, Output, QueryList} from '@angular/core';
 import {TabPanelComponent} from "./tab-panel/tab-panel.component";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {delay, startWith, tap} from "rxjs/operators";
@@ -21,7 +12,6 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 	imports: [TabPanelComponent, NgForOf, NgClass, NgIf],
 })
 export class TabsComponent implements AfterContentInit {
-	private destroyRef: DestroyRef = inject(DestroyRef);
 	public tabs: TabPanelComponent[];
 	public currentTabIndex: number = 0;
 
@@ -30,6 +20,10 @@ export class TabsComponent implements AfterContentInit {
 
 	@Output()
 	public close: EventEmitter<number> = new EventEmitter<number>();
+
+
+	constructor(private destroyRef: DestroyRef) {
+	}
 
 	public closeTab(index: number, tab: TabPanelComponent): void {
 		this.close.emit(index);

@@ -8,10 +8,7 @@ import {routing} from "./app.routing";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
-import {NgOptimizedImage} from "@angular/common";
-import {TabPanelComponent} from "./shared/components/tabs/tab-panel/tab-panel.component";
 import {WeatherApiInterceptor} from "./core/api/weather-api.interceptor";
-import { FormErrorsMessagePipe } from './shared/pipes/form-errors-message.pipe';
 
 @NgModule({
 	declarations: [
@@ -24,8 +21,6 @@ import { FormErrorsMessagePipe } from './shared/pipes/form-errors-message.pipe';
 		RouterModule,
 		routing,
 		ServiceWorkerModule.register('/weather/ngsw-worker.js', {enabled: environment.production}),
-		NgOptimizedImage,
-		TabPanelComponent
 	],
 	providers: [
 		{

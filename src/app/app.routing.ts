@@ -13,6 +13,11 @@ const appRoutes: Routes = [
 			forecast: forecastResolver,
 		},
 		loadComponent: () => import('./views/forecasts/forecasts.component').then(c => c.ForecastsComponent)
+	},
+	{
+		path: '**',
+		pathMatch: 'full',
+		redirectTo: ''
 	}
 ];
 export const routing: ModuleWithProviders<any> = RouterModule.forRoot(appRoutes, {});

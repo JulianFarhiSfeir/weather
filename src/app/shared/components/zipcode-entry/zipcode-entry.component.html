@@ -1,14 +1,15 @@
 <div class="well">
 	<form [formGroup]="form"
 		  novalidate
-		  (ngSubmit)="submit()" [ngClass]="{'has-error': form.invalid && form.dirty, 'has-success': form.valid && form.dirty}">
-		<h2>Enter a zipcode</h2>
+		  (ngSubmit)="submit()"
+		  [ngClass]="{'has-error': form.invalid && form.dirty, 'has-success': form.valid && form.dirty}">
+		<h2>Search the USA weather conditions</h2>
 		<div class="form-group">
 			<label for="zipcode">Zipcode</label>
 			<input type="text"
 				   id="zipcode"
 				   formControlName="zipcode"
-				   placeholder="Zipcode"
+				   placeholder="Enter a zipcode"
 				   class="form-control"></div>
 		<p class="message invalid-feedback">
 			<ng-container *ngIf="form.controls.zipcode.errors as errors">

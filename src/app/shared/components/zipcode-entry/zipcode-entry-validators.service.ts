@@ -4,7 +4,8 @@ import {LocationService} from "../../../core/location.service";
 
 @Injectable()
 export class ZipcodeEntryValidatorsService {
-	private locationService: LocationService = inject(LocationService);
+	constructor(private locationService: LocationService) {
+	}
 
 	public alreadyExist(): ValidatorFn {
 		return control => {

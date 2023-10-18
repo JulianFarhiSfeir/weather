@@ -7,7 +7,7 @@ import {ConditionsAndZip} from "../weather-manager.typings";
 import {environment} from "../../../environments/environment";
 
 @Injectable({
-	providedIn: 'root'
+	providedIn: 'root',
 })
 export class WeatherApiService {
 	static URL = environment.weatherApiBaseUrl;

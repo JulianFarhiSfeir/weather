@@ -3,7 +3,7 @@ import {WeatherApiService} from "./api/weather-api.service";
 import {catchError, tap} from "rxjs/operators";
 import {ConditionsAndZip} from "./weather-manager.typings";
 import {LocationService} from "./location.service";
-import {combineLatest, Observable, of, throwError} from "rxjs";
+import {forkJoin, Observable, throwError} from "rxjs";
 import {environment} from "../../environments/environment";
 import {ExternalCurrentCondition} from "./api/weather-api.typings";
 
@@ -21,23 +21,15 @@ export class WeatherManagerService {
 		this.conditionsInitialization().subscribe();
 	}
 
-	private conditionsInitialization() {
-		const conditions$ = this.locationService.getLocations().map((zipcode) => this.weatherApiService.getConditionByZipCode(zipcode)
-			.pipe(
-				tap(data => this.currentConditions.mutate(conditions => {
-					conditions.push({zipcode, data})
-				}))
-			));
-		return combineLatest(conditions$);
-	}
-
 	public addCurrentConditions(zipcode: string): Observable<ExternalCurrentCondition> {
 		return this.weatherApiService.getConditionByZipCode(zipcode)
 			.pipe(
 				tap(() => this.locationService.addLocation(zipcode)),
-				tap((data: ExternalCurrentCondition) => this.currentConditions.mutate(conditions => {
-					conditions.push({zipcode, data})
-				})),
+				tap((data: ExternalCurrentCondition) => this.currentConditions.mutate(
+					(conditions: Partial<ConditionsAndZip>[]) =>
+						conditions.push({zipcode, data})
+					)
+				),
 				catchError(() => {
 					return throwError({
 						message: 'Unknown zip code'
@@ -48,10 +40,12 @@ export class WeatherManagerService {
 	}
 
 	public removeCurrentConditions(zipcode: string): void {
-		this.currentConditions.mutate(conditions => {
-			for (let i in conditions) {
-				if (conditions[i].zipcode == zipcode)
-					conditions.splice(+i, 1);
+		this.currentConditions.mutate((conditions: Partial<ConditionsAndZip>[]): void => {
+			for (let index in conditions) {
+				if (conditions[index].zipcode === zipcode) {
+					conditions.splice(Number(index), 1);
+					break;
+				}
 			}
 		});
 		this.locationService.removeLocation(zipcode);
@@ -76,5 +70,26 @@ export class WeatherManagerService {
 			return this.ICON_URL + "art_fog.png";
 		else
 			return this.ICON_URL + "art_clear.png";
+	}
+
+	private generateCondition(zipcode: string): Observable<ExternalCurrentCondition> {
+		return this.weatherApiService
+			.getConditionByZipCode(zipcode)
+			.pipe(
+				tap((data: ExternalCurrentCondition) =>
+					this.currentConditions
+						.mutate((conditions: Partial<ConditionsAndZip>[]): number =>
+							conditions.push({
+								zipcode,
+								data
+							})
+						)
+				)
+			);
+	}
+
+	private conditionsInitialization(): Observable<ExternalCurrentCondition[]> {
+		const conditions$: Observable<ExternalCurrentCondition>[] = this.locationService.getLocations().map(this.generateCondition.bind(this));
+		return forkJoin(conditions$);
 	}
 }
